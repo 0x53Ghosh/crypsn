@@ -1,0 +1,10 @@
+# ~/projects/crypsn/.bashrc.local
+
+# Minimal prompt just with $
+PS1='\[\e[38;5;202m\]$\[\e[0m\] '
+
+# Hide Makefile and shell.nix from ls output
+alias ls='ls --color=auto --ignore=Makefile --ignore=shell.nix --ignore=.vscode --ignore=.git --ignore=.bashrc.local'
+
+# Any other project-specific aliases or env vars
+export PROJECT_ENV="crypsn"

@@ -5,5 +5,13 @@
       "path": "nix-shell",
       "args": ["--run", "bash"]
     }
+  },
+
+  "files.exclude": {
+    "**/.git": true,
+    "**/Makefile": true,
+    "**/shell.nix": true,
+    "**/.vscode": true,
+    "**/.bashrc.local": true
   }
 }
