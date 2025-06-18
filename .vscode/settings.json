@@ -3,12 +3,7 @@
   "terminal.integrated.profiles.linux": {
     "nix-shell": {
       "path": "nix-shell",
-      "args": [
-	"--run", "bash",
-	"--impure",
-        "--keep", "SSH_AUTH_SOCK",
-        "--keep", "HOME"
-	]
+      "args": ["--run", "bash",]
     }
   },
 
