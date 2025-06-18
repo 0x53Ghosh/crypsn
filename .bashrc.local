@@ -24,7 +24,18 @@ cd() {
 export PS1='\[\e[34m\]$(rel=${PWD#"$PROJECT_ROOT"/}; [[ "$PWD" == "$PROJECT_ROOT" ]] && echo "" || echo "$rel") \[\e[38;5;202m\]\$\[\e[0m\] '
 
 # Hide Makefile and shell.nix from ls output
-alias ls='ls --color=auto --ignore=Makefile --ignore=shell.nix --ignore=.vscode --ignore=.git --ignore=.bashrc.local'
+alias ls='ls --color=auto --ignore=Makefile --ignore=shell.nix --ignore=.vscode --ignore=.git --ignore=.bashrc.local --ignore=README.md'
 
 # Any other project-specific aliases or env vars
 export PROJECT_ENV="crypsn"
+
+# Start ssh-agent if not running
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    eval "$(ssh-agent -s)"
+fi
+
+# Load SSH key if variable is set
+if [ -n "$SSH_KEY_PATH" ]; then
+  eval "$(ssh-agent -s)" > /dev/null
+  ssh-add "$SSH_KEY_PATH" 2>/dev/null
+fi

@@ -12,6 +12,7 @@
     "**/Makefile": true,
     "**/shell.nix": true,
     "**/.vscode": true,
-    "**/.bashrc.local": true
+    "**/.bashrc.local": true,
+    "**/README.md": true
   }
 }
