@@ -1,7 +1,27 @@
 # ~/projects/crypsn/.bashrc.local
 
-# Minimal prompt just with $
-PS1='\[\e[38;5;202m\]$\[\e[0m\] '
+# Absolute project root
+export PROJECT_ROOT="$(realpath "$PWD")"
+
+# Custom cd command: blocks leaving project root, and sends `cd` to project root
+cd() {
+  local target
+  if [[ -z "$1" ]]; then
+    target="$PROJECT_ROOT"
+  else
+    target=$(realpath -m "$PWD/$1")
+  fi
+
+  # Prevent escaping project root
+  if [[ "$target" == "$PROJECT_ROOT"* ]]; then
+    builtin cd "$target"
+  else
+    echo "You cannot leave the project directory"
+  fi
+}
+
+# Custom prompt: show relative path inside project
+export PS1='\[\e[34m\]$(rel=${PWD#"$PROJECT_ROOT"/}; [[ "$PWD" == "$PROJECT_ROOT" ]] && echo "" || echo "$rel") \[\e[38;5;202m\]\$\[\e[0m\] '
 
 # Hide Makefile and shell.nix from ls output
 alias ls='ls --color=auto --ignore=Makefile --ignore=shell.nix --ignore=.vscode --ignore=.git --ignore=.bashrc.local'
